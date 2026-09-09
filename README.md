@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Funil de captação de leads (multi-step form) para o diagnóstico de crescimento,
+com envio final para um webhook n8n. Ver `AGENTS.md` para as convenções desta
+versão do Next.js antes de mexer no código.
+
+## Configuração
+
+Copie `.env.example` para `.env.local` e preencha:
+
+- `NEXT_PUBLIC_BRAND_*` — nome, headline, descrição e imagens de marca (logo em fundo escuro, logo transparente, fundo do painel lateral).
+- `NEXT_PUBLIC_GTM_ID` / `NEXT_PUBLIC_META_PIXEL_ID` — em branco, o script correspondente não é carregado.
+- `NEXT_PUBLIC_N8N_WEBHOOK_URL` — endpoint que recebe o payload do lead ao final do funil.
+
+Assets de marca já em `public/`: `logo-fundo-preto.jpg` (logo sobre o painel laranja), `logo-sem-fundo.PNG` (logo transparente sobre fundo branco) e `brand-panel-bg.webp` (imagem de fundo do painel lateral).
+
+Pendências para ir pra produção (ver brief original):
+
+- **Regra de qualificação** ainda não definida pelo time comercial — placeholder em [lib/qualification.ts](lib/qualification.ts).
+- **Depoimentos** são placeholders ilustrativos em [lib/testimonials.ts](lib/testimonials.ts) — trocar por depoimentos reais.
+- **Opções de área de atuação** em [lib/steps.ts](lib/steps.ts) devem ser ajustadas pro nicho do cliente.
 
 ## Getting Started
 
