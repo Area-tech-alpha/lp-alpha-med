@@ -503,29 +503,44 @@ input:focus, select:focus, textarea:focus { border-color: var(--brand); box-shad
   .form-panel { padding-inline: clamp(28px, 4vw, 54px) }
 }
 @media (max-width: 760px) {
-  .form-shell { display: block; overflow: visible }
+  .form-shell { display: block; overflow: visible; min-height: 100svh; min-height: 100dvh }
   .brand-panel {
     position: static;
     display: flex;
     min-height: 0;
     height: auto;
     width: 100%;
-    padding: 28px 20px;
+    padding: 20px 20px 16px;
     order: -1;
   }
-  .brand-panel-content { padding: 0; min-height: 0 }
-  .brand-panel-logo { width: 40px; height: 40px; margin-bottom: 12px }
-  .brand-panel-copy { margin-top: 16px; max-width: 100% }
-  .brand-panel-copy h2 { font-size: 22px; line-height: 1.25 }
-  .brand-panel-copy p { font-size: 14px }
-  .brand-pill-row { margin-top: 16px }
-  .brand-pill-row span { font-size: 12px; padding: 6px 10px }
-  .form-panel { min-height: 100svh; padding: 20px 22px 18px }
-  .form-header { min-height: 44px }
-  .content-stack { width: 100%; margin-top: clamp(24px, 6vh, 40px) }
+  .brand-panel-content { padding: 0; min-height: 0; align-items: center; text-align: center }
+  .brand-panel-logo { width: 36px; height: 36px; margin: 0 auto 8px }
+  .brand-panel-copy {
+    margin-top: 10px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .brand-panel-copy h2 { margin: 8px 0; font-size: 19px; line-height: 1.2 }
+  .brand-panel-copy p { font-size: 13px; line-height: 1.4 }
+  .brand-pill-row,
+  .brand-panel-copy .pill-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 8px;
+  }
+  .brand-pill-row span { font-size: 11px; padding: 5px 10px; white-space: nowrap }
+  .form-panel { padding: 16px 20px 14px }
+  .form-header { min-height: 38px }
+  .content-stack { width: 100%; margin-top: clamp(12px, 3vh, 20px) }
   .question-card, .question-copy { min-height: auto }
-  h1 { font-size: clamp(21px, 6vw, 26px) }
-  .field-group { margin-top: 20px }
+  .eyebrow { margin-bottom: 4px }
+  h1 { font-size: clamp(19px, 5.5vw, 24px) }
+  .field-group { margin-top: 14px }
   .choice-grid { grid-template-columns: 1fr }
   input, select { height: 48px; padding-inline: 16px; font-size: 16px }
   .choice-button, .date-button, .time-button { min-height: 44px; padding: 10px 12px; font-size: 13px }
@@ -534,6 +549,21 @@ input:focus, select:focus, textarea:focus { border-color: var(--brand); box-shad
   .testimonial-card { margin-top: 36px }
   .testimonial-copy { min-height: 110px; padding: 27px 22px 21px }
   .legal-footer { padding-top: 36px }
+}
+@media (max-width: 760px) and (max-height: 700px) {
+  .brand-panel { padding: 14px 16px 12px }
+  .brand-panel-logo { width: 30px; height: 30px; margin-bottom: 6px }
+  .brand-panel-copy { margin-top: 6px }
+  .brand-panel-copy h2 { margin: 6px 0; font-size: 16px }
+  .brand-panel-copy p { font-size: 12px; line-height: 1.35 }
+  .brand-pill-row { margin-top: 8px; gap: 6px }
+  .brand-pill-row span { font-size: 10px; padding: 4px 8px }
+  .form-panel { padding: 12px 18px 10px }
+  .form-header { min-height: 32px }
+  .content-stack { margin-top: 8px }
+  .eyebrow { font-size: 12px; margin-bottom: 3px }
+  h1 { font-size: 18px }
+  .field-group { margin-top: 10px }
 }
 @media (max-width: 560px) {
   .form-panel { padding: 16px 16px 18px }
