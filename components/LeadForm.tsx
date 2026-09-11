@@ -11,7 +11,9 @@ import {
   BRAND_PANEL_BG,
   BRAND_PILLS,
   FORM_NAME,
+  LEAD_ORIGIN,
   LEAD_SOURCE,
+  LEAD_WEBHOOK_URL,
   META_PIXEL_ID,
   N8N_WEBHOOK_URL,
 } from "@/lib/config";
@@ -98,15 +100,15 @@ export function LeadForm() {
       leadFiredRef.current = true;
     }
 
-    if (N8N_WEBHOOK_URL) {
-      const payload = {
-        ...finalAnswers,
-        qualificado,
-        attribution: attributionRef.current,
-      };
+    const payload = {
+      ...finalAnswers,
+      qualificado,
+      attribution: attributionRef.current,
+    };
 
-      // Disparo em paralelo, sem bloquear o redirecionamento — keepalive
-      // garante que a requisição termine mesmo após a navegação.
+    // Disparo em paralelo, sem bloquear o redirecionamento — keepalive
+    // garante que a requisição termine mesmo após a navegação.
+    if (N8N_WEBHOOK_URL) {
       fetch(N8N_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -114,6 +116,13 @@ export function LeadForm() {
         keepalive: true,
       }).catch(() => { });
     }
+
+    fetch(LEAD_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...payload, origem: LEAD_ORIGIN }),
+      keepalive: true,
+    }).catch(() => { });
 
     router.push(qualificado ? "/obrigado" : "/agradecimento");
   }
