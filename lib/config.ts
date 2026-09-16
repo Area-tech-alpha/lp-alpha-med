@@ -42,7 +42,7 @@ export const SOCIAL_INSTAGRAM_URL =
 
 // Tracking — em branco = script não é renderizado.
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "";
-export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
 
 // Identificação do formulário nos eventos de tracking (dataLayer).
 export const FORM_NAME = process.env.NEXT_PUBLIC_FORM_NAME || "diagnostico_captacao_leads";
