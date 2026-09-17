@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BRAND_LOGO_MARK, BRAND_NAME, OBRIGADO_DESCRIPTION, OBRIGADO_HEADLINE } from "@/lib/config";
 import { renderAccentText } from "@/lib/text";
 
@@ -27,7 +28,15 @@ export default function ObrigadoPage() {
         </p>
       </footer>
 
-      <button type="button" id="px-anchor" className="px-anchor" aria-hidden="true" tabIndex={-1} />
+      <Link
+        href="/"
+        id="px-anchor"
+        className="px-anchor"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        &nbsp;
+      </Link>
     </main>
   );
 }
