@@ -26,6 +26,8 @@ export default function ObrigadoPage() {
           © {new Date().getFullYear()} {BRAND_NAME}. Todos os direitos reservados.
         </p>
       </footer>
+
+      <button type="button" id="px-anchor" className="px-anchor" aria-hidden="true" tabIndex={-1} />
     </main>
   );
 }
