@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BRAND_LOGO_MARK, BRAND_NAME, OBRIGADO_DESCRIPTION, OBRIGADO_HEADLINE } from "@/lib/config";
 import { renderAccentText } from "@/lib/text";
+import { PxAnchor } from "./PxAnchor";
 
 export const metadata: Metadata = {
   title: `Cadastro concluído | ${BRAND_NAME}`,
@@ -28,21 +28,7 @@ export default function ObrigadoPage() {
         </p>
       </footer>
 
-      <button
-        type="button"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute w-px h-px p-0 m-0 opacity-0 overflow-hidden border-0"
-      />
-
-      <Link
-        href="/"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute w-px h-px p-0 m-0 opacity-0 overflow-hidden border-0"
-      >
-        &nbsp;
-      </Link>
+      <PxAnchor />
     </main>
   );
 }
