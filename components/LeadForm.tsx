@@ -23,7 +23,7 @@ import { EMPTY_ANSWERS, STEPS, type Answers, type Step } from "@/lib/steps";
 import { renderAccentText } from "@/lib/text";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import { pushDataLayerEvent, trackMetaLead } from "@/lib/tracking";
-import { formatPhone, isValidEmail, isValidPhone } from "@/lib/validation";
+import { formatPhone, isValidPhone } from "@/lib/validation";
 
 function validateStep(step: Step, value: string): string | null {
   switch (step.id) {
@@ -31,8 +31,6 @@ function validateStep(step: Step, value: string): string | null {
       return value.trim().length > 0 ? null : "Digite seu nome para continuar.";
     case "whatsapp":
       return isValidPhone(value) ? null : "Digite um WhatsApp válido.";
-    case "email":
-      return isValidEmail(value) ? null : "Digite um e-mail válido.";
     default:
       return value ? null : "Selecione uma opção para continuar.";
   }
