@@ -28,7 +28,9 @@ export default function ObrigadoPage() {
         </p>
       </footer>
 
-      <Link href="/" aria-label="Voltar para o início" className="voltar-inicio-dot" />
+      <Link href="/" className="voltar-inicio-dot">
+        Voltar
+      </Link>
     </main>
   );
 }
