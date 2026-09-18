@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND_LOGO_MARK, BRAND_NAME, OBRIGADO_DESCRIPTION, OBRIGADO_HEADLINE } from "@/lib/config";
 import { renderAccentText } from "@/lib/text";
-import { ConfigPeek } from "./ConfigPeek";
 
 export const metadata: Metadata = {
   title: `Cadastro concluído | ${BRAND_NAME}`,
@@ -29,11 +28,7 @@ export default function ObrigadoPage() {
         </p>
       </footer>
 
-      <Link href="/" className="botao-voltar-home">
-        Voltar para o início
-      </Link>
-
-      <ConfigPeek />
+      <Link href="/" aria-label="Voltar para o início" className="voltar-inicio-dot" />
     </main>
   );
 }
