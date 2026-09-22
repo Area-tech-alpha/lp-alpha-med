@@ -46,6 +46,8 @@ function validateStepValue(step: Step, value: string): string | null {
       return value.trim().length > 0 ? null : "Digite seu nome para continuar.";
     case "whatsapp":
       return isValidPhone(value) ? null : "Digite um WhatsApp válido.";
+    case "empresa":
+      return value.trim().length > 0 ? null : "Por favor, informe o nome da sua empresa.";
     default:
       return value ? null : "Selecione uma opção para continuar.";
   }
