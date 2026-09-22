@@ -18,7 +18,6 @@ import {
   N8N_WEBHOOK_URL,
 } from "@/lib/config";
 import { getAttribution, type Attribution } from "@/lib/attribution";
-import { isQualified } from "@/lib/qualification";
 import { EMPTY_ANSWERS, STEPS, type Answers, type Step } from "@/lib/steps";
 import { renderAccentText } from "@/lib/text";
 import { TESTIMONIALS } from "@/lib/testimonials";
@@ -98,7 +97,7 @@ export function LeadForm() {
   }
 
   function finalize(finalAnswers: Answers) {
-    const qualificado = isQualified(finalAnswers);
+    const qualificado = true; // sem faturamento no funil, todo lead é considerado qualificado
 
     pushDataLayerEvent({
       event: "form_submit",
@@ -134,7 +133,7 @@ export function LeadForm() {
       keepalive: true,
     }).catch(() => { });
 
-    router.push(qualificado ? "/obrigado" : "/agradecimento");
+    router.push("/obrigado");
   }
 
   async function handleSubmit(e: React.FormEvent) {
