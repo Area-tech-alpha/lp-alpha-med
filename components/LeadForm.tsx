@@ -25,6 +25,21 @@ import { TESTIMONIALS } from "@/lib/testimonials";
 import { pushDataLayerEvent, trackMetaLead } from "@/lib/tracking";
 import { formatPhone, isValidPhone } from "@/lib/validation";
 
+async function verifyPhoneIsReal(digits: string): Promise<boolean> {
+  try {
+    const res = await fetch("/api/verify-phone", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone: `+55${digits}` }),
+    });
+    if (!res.ok) return true;
+    const data = await res.json();
+    return Boolean(data.valid);
+  } catch {
+    return true;
+  }
+}
+
 function validateStep(step: Step, value: string): string | null {
   switch (step.id) {
     case "nome":
@@ -41,6 +56,7 @@ export function LeadForm() {
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
   const [error, setError] = useState("");
+  const [verifyingPhone, setVerifyingPhone] = useState(false);
   const attributionRef = useRef<Attribution | null>(null);
   const leadFiredRef = useRef(false);
 
@@ -50,8 +66,6 @@ export function LeadForm() {
     [stepIndex]
   );
   const progress = (stepIndex / STEPS.length) * 100;
-  // Imagem real da marca por cima, gradiente laranja como fallback caso o
-  // arquivo ainda não exista em public/ (ver BRAND_PANEL_BG).
   const brandPanelStyle = {
     backgroundImage: `url(${BRAND_PANEL_BG}), linear-gradient(135deg, var(--brand-hi), var(--brand) 55%, var(--brand-deep))`,
   };
@@ -104,8 +118,6 @@ export function LeadForm() {
       attribution: attributionRef.current,
     };
 
-    // Disparo em paralelo, sem bloquear o redirecionamento — keepalive
-    // garante que a requisição termine mesmo após a navegação.
     if (N8N_WEBHOOK_URL) {
       fetch(N8N_WEBHOOK_URL, {
         method: "POST",
@@ -125,7 +137,7 @@ export function LeadForm() {
     router.push(qualificado ? "/obrigado" : "/agradecimento");
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const value = answers[step.id];
     const validationError = validateStep(step, value);
@@ -133,6 +145,16 @@ export function LeadForm() {
     if (validationError) {
       setError(validationError);
       return;
+    }
+
+    if (step.id === "whatsapp") {
+      setVerifyingPhone(true);
+      const phoneIsReal = await verifyPhoneIsReal(value.replace(/\D/g, ""));
+      setVerifyingPhone(false);
+      if (!phoneIsReal) {
+        setError("Esse número de WhatsApp não parece ser válido.");
+        return;
+      }
     }
 
     if (stepIndex === STEPS.length - 1) {
@@ -239,8 +261,8 @@ export function LeadForm() {
             </div>
 
             <div className="action-row">
-              <button className="primary-button" type="submit" disabled={!answers[step.id]}>
-                {stepIndex === STEPS.length - 1 ? "ENVIAR" : "CONFIRMAR"}
+              <button className="primary-button" type="submit" disabled={verifyingPhone}>
+                {verifyingPhone ? "VERIFICANDO..." : stepIndex === STEPS.length - 1 ? "ENVIAR" : "CONFIRMAR"}
                 <span>→</span>
               </button>
             </div>
