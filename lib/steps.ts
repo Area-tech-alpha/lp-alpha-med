@@ -1,10 +1,12 @@
-export type StepId = "nome" | "whatsapp";
+export type StepId = "nome" | "whatsapp" | "areaAtuacao" | "faturamento";
 
 export type Answers = Record<StepId, string>;
 
 export const EMPTY_ANSWERS: Answers = {
   nome: "",
   whatsapp: "",
+  areaAtuacao: "",
+  faturamento: "",
 };
 
 interface BaseStep {
@@ -41,5 +43,33 @@ export const STEPS: Step[] = [
     question: "Qual seu WhatsApp?",
     placeholder: "99999-9999",
     helperText: "Vamos usar esse número só para falar sobre o seu diagnóstico.",
+  },
+  {
+    id: "areaAtuacao",
+    type: "select",
+    eyebrow: "Agora, sobre o seu consultório",
+    question: "Qual é a área de atuação do seu consultório?",
+    // TODO: ajustar as opções pro nicho/cliente antes de ir pra produção.
+    options: [
+      "Cirurgia Plástica",
+      "Dermatologia",
+      "Nutrologia",
+      "Odontologia",
+      "Outro",
+    ],
+  },
+  {
+    id: "faturamento",
+    type: "select",
+    eyebrow: "Última pergunta!",
+    question: "Qual faturamento médio mensal do seu consultório?",
+    options: [
+      "Mais de 2 milhões mensais",
+      "Entre 500 mil e 2 milhões mensais",
+      "Entre 150 e 500 mil reais mensais",
+      "Entre 50 e 150 mil reais mensais",
+      "Entre 20 e 50 mil reais mensais",
+      "Menos de R$20.000,00 mensal",
+    ],
   },
 ];
