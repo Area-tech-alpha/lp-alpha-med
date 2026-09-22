@@ -158,58 +158,63 @@ export function LeadForm() {
         </header>
 
         <div className="content-stack">
-          <form className="question-card question-card--single" onSubmit={handleSubmit} noValidate>
-            {STEPS.map((step) => (
-              <div className="question-block" key={step.id}>
-                <div className="question-copy">
-                  <p className="eyebrow">{step.eyebrow}</p>
-                  <h2>{step.question}</h2>
-                </div>
+          <form className="question-card compact-form" onSubmit={handleSubmit} noValidate>
+            <div className="question-copy">
+              <p className="eyebrow">Preencha e um especialista entra em contato</p>
+              <h1>Quero saber mais</h1>
+            </div>
 
-                <div className="field-group">
-                  {step.type === "select" ? (
-                    <div className="choice-grid" role="group" aria-label={step.question}>
-                      {step.options.map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          className={`choice-button${answers[step.id] === option ? " selected" : ""}`}
-                          onClick={() => updateAnswer(step.id, option)}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  ) : step.type === "tel" ? (
-                    <div className="phone-control">
-                      <span className="phone-prefix">+55</span>
-                      <input
-                        type="tel"
-                        inputMode="numeric"
-                        placeholder={step.placeholder}
-                        aria-label={step.question}
-                        aria-invalid={Boolean(errors[step.id])}
-                        value={answers[step.id]}
-                        onChange={(e) => updateAnswer(step.id, formatPhone(e.target.value))}
-                      />
-                    </div>
-                  ) : (
+            {STEPS.map((step) => (
+              <div className="field-group" key={step.id}>
+                <label className="field-label" htmlFor={step.id}>{step.question}</label>
+
+                {step.type === "select" ? (
+                  <select
+                    id={step.id}
+                    value={answers[step.id]}
+                    required
+                    aria-invalid={Boolean(errors[step.id])}
+                    onChange={(e) => updateAnswer(step.id, e.target.value)}
+                  >
+                    <option value="" disabled>
+                      {step.placeholder}
+                    </option>
+                    {step.options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                ) : step.type === "tel" ? (
+                  <div className="phone-control">
+                    <span className="phone-prefix">+55</span>
                     <input
-                      type={step.type}
+                      id={step.id}
+                      type="tel"
+                      inputMode="numeric"
                       placeholder={step.placeholder}
-                      aria-label={step.question}
+                      required
                       aria-invalid={Boolean(errors[step.id])}
                       value={answers[step.id]}
-                      onChange={(e) => updateAnswer(step.id, e.target.value)}
+                      onChange={(e) => updateAnswer(step.id, formatPhone(e.target.value))}
                     />
-                  )}
-                  {step.type !== "select" && step.helperText ? (
-                    <p className="helper-text">{step.helperText}</p>
-                  ) : null}
-                  {errors[step.id] ? (
-                    <p className="error-message" role="alert">{errors[step.id]}</p>
-                  ) : null}
-                </div>
+                  </div>
+                ) : (
+                  <input
+                    id={step.id}
+                    type={step.type}
+                    placeholder={step.placeholder}
+                    required
+                    aria-invalid={Boolean(errors[step.id])}
+                    value={answers[step.id]}
+                    onChange={(e) => updateAnswer(step.id, e.target.value)}
+                  />
+                )}
+
+                {step.type !== "select" && step.helperText ? (
+                  <p className="helper-text">{step.helperText}</p>
+                ) : null}
+                {errors[step.id] ? <p className="error-message" role="alert">{errors[step.id]}</p> : null}
               </div>
             ))}
 
