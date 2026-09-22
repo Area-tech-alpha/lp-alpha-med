@@ -209,6 +209,16 @@ h1 {
   font-weight: 800;
   line-height: 1.2;
 }
+.question-copy h2 {
+  color: var(--ink);
+  letter-spacing: -.02em;
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(22px, 1.9vw, 28px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+.question-block + .question-block { margin-top: 28px }
 .field-group { margin-top: 26px }
 .helper-text { color: var(--muted); margin: 8px 2px 0; font-size: 13px }
 
