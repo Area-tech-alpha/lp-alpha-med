@@ -1,8 +1,9 @@
-export type StepId = "nome" | "whatsapp" | "areaAtuacao" | "faturamento";
+export type StepId = "nome" | "whatsapp" | "empresa" | "areaAtuacao" | "faturamento";
 export type Answers = Record<StepId, string>;
 export const EMPTY_ANSWERS: Answers = {
   nome: "",
   whatsapp: "",
+  empresa: "",
   areaAtuacao: "",
   faturamento: "",
 };
@@ -19,6 +20,13 @@ export type Step = TextStep | SelectStep;
 export const STEPS: Step[] = [
   { id: "nome", type: "text", eyebrow: "Bom ter você aqui!", question: "Nome", placeholder: "Digite sua resposta..." },
   { id: "whatsapp", type: "tel", eyebrow: "Perfeito!", question: "WhatsApp", placeholder: "(61) 99123-4567", helperText: "Vamos usar esse número só para falar sobre o seu diagnóstico." },
+  {
+    id: "empresa",
+    type: "text",
+    eyebrow: "Quase lá!",
+    question: "Qual o nome da sua empresa?",
+    placeholder: "Digite o nome da sua empresa...",
+  },
   {
     id: "areaAtuacao",
     type: "select",
