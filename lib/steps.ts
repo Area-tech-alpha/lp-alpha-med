@@ -8,24 +8,34 @@ export const EMPTY_ANSWERS: Answers = {
   faturamento: "",
 };
 
-interface BaseStep { id: StepId; eyebrow: string; question: string; }
+// Tipos de campo — iguais nas 3 LPs (o components/LeadForm.tsx é o mesmo).
+interface BaseStep {
+  id: StepId;
+  question: string;
+  placeholder: string;
+  eyebrow?: string;
+}
 export interface TextStep extends BaseStep {
   type: "text" | "email" | "tel";
-  placeholder: string;
   helperText?: string;
+  autoComplete?: string;
 }
-export interface SelectStep extends BaseStep { type: "select"; placeholder: string; options: string[]; }
+export interface SelectStep extends BaseStep {
+  type: "select";
+  options: string[];
+}
 export type Step = TextStep | SelectStep;
 
 export const STEPS: Step[] = [
-  { id: "nome", type: "text", eyebrow: "Bom ter você aqui!", question: "Nome", placeholder: "Digite sua resposta..." },
-  { id: "whatsapp", type: "tel", eyebrow: "Perfeito!", question: "WhatsApp", placeholder: "(61) 99123-4567", helperText: "Vamos usar esse número só para falar sobre o seu diagnóstico." },
+  { id: "nome", type: "text", eyebrow: "Bom ter você aqui!", question: "Nome", placeholder: "Digite sua resposta...", autoComplete: "name" },
+  { id: "whatsapp", type: "tel", eyebrow: "Perfeito!", question: "WhatsApp", placeholder: "(61) 99123-4567", helperText: "Vamos usar esse número só para falar sobre o seu diagnóstico.", autoComplete: "tel-national" },
   {
     id: "empresa",
     type: "text",
     eyebrow: "Quase lá!",
     question: "Qual o nome da sua empresa?",
     placeholder: "Digite o nome da sua empresa...",
+    autoComplete: "organization",
   },
   {
     id: "areaAtuacao",

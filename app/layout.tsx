@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { BRAND_NAME, GTM_ID, META_PIXEL_ID } from "@/lib/config";
+import { SEO } from "@/lib/landing";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -10,14 +11,25 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: `Diagnóstico de Crescimento | ${BRAND_NAME}`,
-  description:
-    "Responda algumas perguntas sobre o seu consultório para receber um diagnóstico gratuito.",
+  title: SEO.title,
+  description: SEO.description,
+  openGraph: {
+    title: SEO.title,
+    description: SEO.description,
+    siteName: BRAND_NAME,
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: SEO.title,
+    description: SEO.description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={geist.variable}>
+    <html lang="pt-BR" className={geist.variable} data-scroll-behavior="smooth">
       <body>
         {GTM_ID ? (
           <Script id="gtm-base" strategy="afterInteractive">

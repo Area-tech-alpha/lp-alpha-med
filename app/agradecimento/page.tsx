@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import "../results.css";
 import {
   AGRADECIMENTO_CTA,
   AGRADECIMENTO_DESCRIPTION,
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 
 // Mesmo padrão de imagem + gradiente de fallback do painel do formulário.
 const visualStyle = {
-  backgroundImage: `url(${BRAND_PANEL_BG}), linear-gradient(135deg, var(--brand-hi), var(--brand) 55%, var(--brand-deep))`,
+  backgroundImage: `url(${BRAND_PANEL_BG}), linear-gradient(135deg, var(--brand-light), var(--brand) 55%, var(--brand-deep))`,
 };
 
 function YoutubeIcon() {
