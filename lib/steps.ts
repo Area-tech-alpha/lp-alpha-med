@@ -42,7 +42,7 @@ export const STEPS: Step[] = [
     type: "select",
     eyebrow: "Agora, sobre o seu consultório",
     question: "Área de atuação do consultório",
-    placeholder: "Selecione uma área de atuação",
+    placeholder: "Selecione a área",
     options: ["Cirurgia Plástica", "Dermatologia", "Nutrologia", "Odontologia", "Outro"],
   },
   {
@@ -50,7 +50,7 @@ export const STEPS: Step[] = [
     type: "select",
     eyebrow: "Última pergunta!",
     question: "Faturamento médio mensal do consultório",
-    placeholder: "Selecione um faturamento mensal",
+    placeholder: "Selecione o faturamento",
     options: [
       "Mais de 2 milhões mensais",
       "Entre 500 mil e 2 milhões mensais",
