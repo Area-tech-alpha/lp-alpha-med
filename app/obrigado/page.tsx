@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import "../results.css";
 import { BRAND_LOGO_MARK, BRAND_NAME, OBRIGADO_DESCRIPTION, OBRIGADO_HEADLINE } from "@/lib/config";
 import { renderAccentText } from "@/lib/text";
 

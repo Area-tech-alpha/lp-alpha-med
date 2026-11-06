@@ -8,14 +8,14 @@ export const BRAND_HEADLINE =
 export const BRAND_DESCRIPTION =
   process.env.NEXT_PUBLIC_BRAND_DESCRIPTION ||
   "Uma análise estratégica para identificar oportunidades de captação de clientes para o seu consultório.";
-// Logo em fundo escuro (usada sobre o painel laranja/imagem de marca)
+// Logo com fundo preto (usada sobre a textura amarela na página /agradecimento)
 export const BRAND_LOGO_PANEL =
   process.env.NEXT_PUBLIC_BRAND_LOGO_PANEL || "/logo-fundo-preto.jpg";
-// Logo transparente (usada sobre fundo branco: header do form, páginas de resultado)
+// Logo transparente (usada sobre fundo escuro: header, rodapé e páginas de resultado)
 export const BRAND_LOGO_MARK =
   process.env.NEXT_PUBLIC_BRAND_LOGO_MARK || "/logo-sem-fundo.PNG";
+// Textura amarela usada no visual da página /agradecimento.
 export const BRAND_PANEL_BG = process.env.NEXT_PUBLIC_BRAND_PANEL_BG || "/brand-panel-bg.webp";
-export const BRAND_PILLS = ["Demanda qualificada", "Previsibilidade", "Estratégia"];
 
 // Página /obrigado (lead qualificado)
 export const OBRIGADO_HEADLINE =
@@ -34,7 +34,7 @@ export const AGRADECIMENTO_CTA =
   process.env.NEXT_PUBLIC_AGRADECIMENTO_CTA ||
   "Enquanto isso, acompanhe nosso conteúdo e fique por dentro das novidades.";
 
-// Redes sociais na página /agradecimento (em branco, o ícone some)
+// Redes sociais (rodapé da landing e página /agradecimento; em branco, o link some)
 export const SOCIAL_YOUTUBE_URL =
   process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE_URL || "https://www.youtube.com/@assessorialpha";
 export const SOCIAL_INSTAGRAM_URL =
