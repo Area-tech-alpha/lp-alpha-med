@@ -48,7 +48,4 @@ export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
 export const FORM_NAME = process.env.NEXT_PUBLIC_FORM_NAME || "diagnostico_captacao_leads";
 export const LEAD_SOURCE = process.env.NEXT_PUBLIC_LEAD_SOURCE || "landing_page";
 
-// Webhook do n8n que recebe o lead ao final do funil.
-export const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "";
-
 export const LEAD_ORIGIN = "med";

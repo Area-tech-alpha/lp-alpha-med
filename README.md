@@ -1,5 +1,5 @@
 Funil de captação de leads (multi-step form) para o diagnóstico de crescimento,
-com envio final para um webhook n8n. Ver `AGENTS.md` para as convenções desta
+com envio final para a entrada de leads do CRM (via `app/api/lead`). Ver `AGENTS.md` para as convenções desta
 versão do Next.js antes de mexer no código.
 
 ## Configuração
@@ -8,7 +8,7 @@ Copie `.env.example` para `.env.local` e preencha:
 
 - `NEXT_PUBLIC_BRAND_*` — nome, headline, descrição e imagens de marca (logo em fundo escuro, logo transparente, fundo do painel lateral).
 - `NEXT_PUBLIC_GTM_ID` / `NEXT_PUBLIC_META_PIXEL_ID` — em branco, o script correspondente não é carregado.
-- `NEXT_PUBLIC_N8N_WEBHOOK_URL` — endpoint que recebe o payload do lead ao final do funil.
+- `CRM_API_URL` / `CRM_LEAD_INTAKE_FOOD_KEY` — só servidor (**Sensitive** na Vercel). O formulário chama `app/api/lead`, que repassa o lead para `POST {CRM_API_URL}/external/lead-intake/food/lp` com `x-api-key` = `LEAD_INTAKE_FOOD_KEY` do CRM e a origem fixa da LP (`LEAD_ORIGIN` em `lib/config.ts`). O CRM aplica a régua do nicho e o lead entra na Matriz; abaixo da faixa mínima é descartado. Nada vai mais ao n8n.
 
 Assets de marca já em `public/`: `logo-fundo-preto.jpg` (logo sobre o painel laranja), `logo-sem-fundo.PNG` (logo transparente sobre fundo branco) e `brand-panel-bg.webp` (imagem de fundo do painel lateral).
 
