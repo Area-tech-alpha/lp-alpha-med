@@ -1,5 +1,5 @@
 // Lógica do funil desta LP: validação dos campos, eventos (dataLayer / Meta
-// Pixel), envio do lead aos webhooks e destino após o envio. É o mesmo
+// Pixel), envio do lead ao CRM e destino após o envio. É o mesmo
 // comportamento que antes ficava dentro de components/LeadForm.tsx — foi só
 // extraído para cá para que o componente do formulário seja idêntico nas 3
 // LPs. Cada LP tem o seu lib/funnel.ts.
@@ -8,9 +8,8 @@ import {
   LEAD_ORIGIN,
   LEAD_SOURCE,
   META_PIXEL_ID,
-  N8N_WEBHOOK_URL,
 } from "./config";
-import { getAttribution, type Attribution } from "./attribution";
+import { getAttribution, type Attribution, readMetaIds } from "./attribution";
 import { isQualified } from "./qualification";
 import type { Answers, StepId } from "./steps";
 import { pushDataLayerEvent, trackMetaLead } from "./tracking";
@@ -81,7 +80,7 @@ export const verifyBeforeSubmit: VerifyBeforeSubmit | null = async (answers) => 
   return phoneIsReal ? null : { whatsapp: "Esse número de WhatsApp não parece ser válido." };
 };
 
-// Dispara eventos e webhooks e devolve a rota de destino.
+// Dispara eventos, envia o lead e devolve a rota de destino.
 export function submitLead(finalAnswers: Answers, session: LeadSession): ResultRoute {
   const qualificado = isQualified(finalAnswers);
 
@@ -94,20 +93,12 @@ export function submitLead(finalAnswers: Answers, session: LeadSession): ResultR
 
   const payload = { ...finalAnswers, qualificado, attribution: session.attribution };
 
-  if (N8N_WEBHOOK_URL) {
-    fetch(N8N_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    }).catch(() => {});
-  }
-
-  // O lead vai para a rota do próprio site, que repassa ao CRM com a chave (app/api/lead).
+  // O lead vai só para a rota do próprio site, que repassa à entrada de leads do CRM
+  // (food/lp) com a chave (app/api/lead). Nada vai mais ao n8n.
   fetch("/api/lead", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...payload, origem: LEAD_ORIGIN }),
+    body: JSON.stringify({ ...payload, ...readMetaIds(), origem: LEAD_ORIGIN }),
     keepalive: true,
   }).catch(() => {});
 
